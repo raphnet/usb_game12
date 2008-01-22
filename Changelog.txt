@@ -1,0 +1,14 @@
+--- v1.0 (Jan 22, 2007)
+	- Initial release under GPLv2. 
+	- Supports 10 inputs (4 direction + 6 buttons), mapped as follows:	
+	   PORTC5: Up
+	   PORTC4: Down
+	   PORTC3: Left
+	   PORTC2: Right
+	   PORTC1: Button 0
+	   PORTC0: Button 1
+	   PORTB5: Button 2
+	   PORTB4: Button 3
+	   PORTB3: Button 4
+	   PORTB2: Button 5  (JP2 on multiuse PCB 2)
+    - JP1 is still available for future expansion
