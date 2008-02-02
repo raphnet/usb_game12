@@ -28,7 +28,7 @@
 #include "oddebug.h"
 #include "gamepad.h"
 
-#include "ten.h"
+#include "twelve.h"
 
 #include "devdesc.h"
 
@@ -207,7 +207,7 @@ int main(void)
 
 	run_mode = (PINB & 0x06)>>1;
 
-	curGamepad = tenGetGamepad();
+	curGamepad = twelveGetGamepad();
 	
 
 	// configure report descriptor according to

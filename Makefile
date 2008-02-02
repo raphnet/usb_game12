@@ -5,14 +5,14 @@
 # Tabsize: 4
 # Copyright: (c) 2006 by OBJECTIVE DEVELOPMENT Software GmbH
 # License: Proprietary, free under certain conditions. See Documentation.
-# This Revision: $Id: Makefile,v 1.1 2008-01-22 20:28:23 raph Exp $
+# This Revision: $Id: Makefile,v 1.2 2008-02-02 13:33:27 raph Exp $
 
 UISP = uisp -dprog=stk500 -dpart=atmega8 -dserial=/dev/ttyS1
 COMPILE = avr-gcc -Wall -Os -Iusbdrv -I. -mmcu=atmega8 -DF_CPU=12000000L #-DDEBUG_LEVEL=1
 COMMON_OBJS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o
 HEXFILE=main.hex
 
-OBJECTS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o ten.o devdesc.o
+OBJECTS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o twelve.o devdesc.o
 
 
 # symbolic targets:
@@ -36,7 +36,7 @@ clean:
 	rm -f $(HEXFILE) main.lst main.obj main.cof main.list main.map main.eep.hex main.bin *.o usbdrv/*.o main.s usbdrv/oddebug.s usbdrv/usbdrv.s
 
 # file targets:
-main.bin:	$(COMMON_OBJS) ten.o devdesc.o 
+main.bin:	$(COMMON_OBJS) twelve.o devdesc.o 
 	$(COMPILE) -o main.bin $(OBJECTS) -Wl,-Map=main.map
 
 $(HEXFILE):	main.bin

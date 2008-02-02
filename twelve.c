@@ -23,7 +23,7 @@
 #include <avr/pgmspace.h>
 #include <string.h>
 #include "gamepad.h"
-#include "ten.h"
+#include "twelve.h"
 
 #define REPORT_SIZE		3
 #define GAMEPAD_BYTES	2
@@ -33,10 +33,10 @@
 
 
 /*********** prototypes *************/
-static void tenInit(void);
-static void tenUpdate(void);
-static char tenChanged(void);
-static void tenBuildReport(unsigned char *reportBuffer);
+static void twelveInit(void);
+static void twelveUpdate(void);
+static char twelveChanged(void);
+static void twelveBuildReport(unsigned char *reportBuffer);
 
 
 
@@ -51,7 +51,7 @@ static void readController(unsigned char bits[2])
 	bits[1] = PINB;
 }
 
-static void tenInit(void)
+static void twelveInit(void)
 {
 	unsigned char sreg;
 	sreg = SREG;
@@ -71,6 +71,8 @@ static void tenInit(void)
 	 * PB4: Button 3
 	 * PB3: Button 4
 	 * PB2: Button 5 (JP2)
+	 * PB1: Button 6 (JP1)
+	 * PB0: Button 7
 	 */
 
 	DDRB = 0; // all inputs
@@ -80,14 +82,14 @@ static void tenInit(void)
 	DDRC &= ~0x3F;
 	PORTC |= 0x3F;
 
-	tenUpdate();
+	twelveUpdate();
 
 	SREG = sreg;
 }
 
 
 
-static void tenUpdate(void)
+static void twelveUpdate(void)
 {
 	unsigned char data[2];
 	int x=128,y=128;
@@ -127,7 +129,7 @@ static void tenUpdate(void)
 
 }	
 
-static char tenChanged(void)
+static char twelveChanged(void)
 {
 	static int first = 1;
 	if (first) { first = 0;  return 1; }
@@ -136,7 +138,7 @@ static char tenChanged(void)
 					last_reported_controller_bytes, REPORT_SIZE);
 }
 
-static void tenBuildReport(unsigned char *reportBuffer)
+static void twelveBuildReport(unsigned char *reportBuffer)
 {
 	if (reportBuffer != NULL)
 	{
@@ -149,19 +151,19 @@ static void tenBuildReport(unsigned char *reportBuffer)
 
 #include "snes_descriptor.c"
 
-Gamepad tenGamepad = {
+Gamepad twelveGamepad = {
 	report_size: 		REPORT_SIZE,
 	reportDescriptorSize:	sizeof(snes_usbHidReportDescriptor),
-	init: 			tenInit,
-	update: 		tenUpdate,
-	changed:		tenChanged,
-	buildReport:		tenBuildReport
+	init: 			twelveInit,
+	update: 		twelveUpdate,
+	changed:		twelveChanged,
+	buildReport:		twelveBuildReport
 };
 
-Gamepad *tenGetGamepad(void)
+Gamepad *twelveGetGamepad(void)
 {
-	tenGamepad.reportDescriptor = (void*)snes_usbHidReportDescriptor;
+	twelveGamepad.reportDescriptor = (void*)snes_usbHidReportDescriptor;
 
-	return &tenGamepad;
+	return &twelveGamepad;
 }
 
