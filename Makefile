@@ -5,14 +5,14 @@
 # Tabsize: 4
 # Copyright: (c) 2006 by OBJECTIVE DEVELOPMENT Software GmbH
 # License: Proprietary, free under certain conditions. See Documentation.
-# This Revision: $Id: Makefile,v 1.2 2008-02-02 13:33:27 raph Exp $
+# This Revision: $Id: Makefile,v 1.3 2015-07-24 01:43:29 cvs Exp $
 
 UISP = uisp -dprog=stk500 -dpart=atmega8 -dserial=/dev/ttyS1
 COMPILE = avr-gcc -Wall -Os -Iusbdrv -I. -mmcu=atmega8 -DF_CPU=12000000L #-DDEBUG_LEVEL=1
 COMMON_OBJS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o
 HEXFILE=main.hex
 
-OBJECTS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o twelve.o devdesc.o
+OBJECTS = usbdrv/usbdrv.o usbdrv/usbdrvasm.o usbdrv/oddebug.o main.o analog.o twelve.o devdesc.o
 
 
 # symbolic targets:
@@ -36,7 +36,7 @@ clean:
 	rm -f $(HEXFILE) main.lst main.obj main.cof main.list main.map main.eep.hex main.bin *.o usbdrv/*.o main.s usbdrv/oddebug.s usbdrv/usbdrv.s
 
 # file targets:
-main.bin:	$(COMMON_OBJS) twelve.o devdesc.o 
+main.bin:	$(COMMON_OBJS) analog.o twelve.o devdesc.o
 	$(COMPILE) -o main.bin $(OBJECTS) -Wl,-Map=main.map
 
 $(HEXFILE):	main.bin
@@ -48,7 +48,7 @@ flash:	all
 	$(UISP) --erase --upload --verify if=$(HEXFILE)
 
 flash_usb:
-	sudo avrdude -p m8 -P usb -c avrispmkII -Uflash:w:$(HEXFILE) -B 1.0
+	avrdude -p m8 -P usb -c avrispmkII -Uflash:w:$(HEXFILE) -B 1.0
 
 # Fuse high byte:
 # 0xc9 = 1 1 0 0   1 0 0 1 <-- BOOTRST (boot reset vector at 0x0000)
@@ -70,5 +70,5 @@ fuse:
 	$(UISP) --wr_fuse_h=0xc9 --wr_fuse_l=0x9f
 
 fuse_usb:
-	sudo avrdude -p m8 -P usb -c avrispmkII -Uhfuse:w:0xc9:m -Ulfuse:w:0x9f:m -B 10.0
+	avrdude -p m8 -P usb -c avrispmkII -Uhfuse:w:0xc9:m -Ulfuse:w:0x9f:m -B 10.0
 
