@@ -1,5 +1,5 @@
-/* Nes/Snes/Genesis/SMS/Atari to USB
- * Copyright (C) 2006-2007 Raphaël Assénat
+/* Twelve input to USB (4 directions + 8 buttons) to USB
+ * Copyright (C) 2008-2015 Raphaël Assénat
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
