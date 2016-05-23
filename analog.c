@@ -45,7 +45,7 @@ static unsigned char last_read_controller_bytes[REPORT_SIZE];
 // the most recently reported bytes
 static unsigned char last_reported_controller_bytes[REPORT_SIZE];
 
-unsigned short adc_sample(char id, int n_samples, int interval_ms)
+unsigned short adc_sample(char id, int n_samples)
 {
 	unsigned short cur_val = 0;
 	unsigned long total = 0;
@@ -67,7 +67,7 @@ unsigned short adc_sample(char id, int n_samples, int interval_ms)
 		cur_val |= (ADCH << 8);
 		total += cur_val << 6; // convert to 16 bit
 
-		_delay_ms((double)interval_ms);
+		_delay_ms(1);
 	}
 
 	if (n_samples == 1) {
@@ -80,8 +80,8 @@ static void readController(unsigned char bits[4])
 {
 	bits[0] = PINC;
 	bits[1] = PINB;
-	bits[2] = adc_sample(1, 5, 1) >> 8;
-	bits[3] = adc_sample(0, 5, 1) >> 8;
+	bits[2] = adc_sample(1, 5) >> 8;
+	bits[3] = adc_sample(0, 5) >> 8;
 }
 
 static void analogInit(void)

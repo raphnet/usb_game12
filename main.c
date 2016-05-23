@@ -1,5 +1,5 @@
-/* Nes/Snes/Genesis/SMS/Atari to USB
- * Copyright (C) 2006-2007 Raphaël Assénat
+/* Twelve input to USB (4 directions + 8 buttons) to USB
+ * Copyright (C) 2006-2008 Raphaël Assénat
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@
 #include "usbdrv.h"
 #include "oddebug.h"
 #include "gamepad.h"
+#include "analog.h"
 
 #include "twelve.h"
 
@@ -37,7 +38,7 @@ static uchar rt_usbHidReportDescriptorSize=0;
 static uchar *rt_usbDeviceDescriptor=NULL;
 static uchar rt_usbDeviceDescriptorSize=0;
 
-PROGMEM int usbDescriptorStringSerialNumber[]  = {
+const PROGMEM int usbDescriptorStringSerialNumber[]  = {
  	USB_STRING_DESCRIPTOR_HEADER(4),
 	'1','0','0','0'
 };
@@ -207,7 +208,20 @@ int main(void)
 
 	run_mode = (PINB & 0x06)>>1;
 
-	curGamepad = twelveGetGamepad();
+	switch(run_mode)
+	{
+		default:
+		case 3:
+			curGamepad = twelveGetGamepad();
+			break;
+
+		case 0:
+		case 1:
+		case 2:
+			curGamepad = analogGetGamepad();
+			break;
+	}
+
 	
 
 	// configure report descriptor according to

@@ -1,3 +1,18 @@
+--- v1.1 ?????
+    - Add support for analog mode with JP1:
+	  	PORTC5: Btn 0
+		PORTC4: Btn 1
+		PORTC3: Btn 2
+		PORTC2: Btn 3
+		PORTC1: X axis (0-5 volts)
+		PORTC0: Y axis (0-5 volts)
+		PORTB5: Btn 4
+		PORTB4: Btn 5
+		PORTB3: Btn 6
+		PORTB2: Btn 7 (JP2 on muitluse PCB 2)
+	- Use unique VID/PID pair. Name is still USB_Game12
+	
+
 --- v1.0 (Jan 22, 2007)
 	- Initial release under GPLv2. 
 	- Supports 12 inputs (4 direction + 8 buttons), mapped as follows:	

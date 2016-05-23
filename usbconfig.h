@@ -5,7 +5,7 @@
  * Tabsize: 4
  * Copyright: (c) 2005 by OBJECTIVE DEVELOPMENT Software GmbH
  * License: GNU GPL v2 (see License.txt) or proprietary (CommercialLicense.txt)
- * This Revision: $Id: usbconfig.h,v 1.3 2008-02-02 14:06:26 raph Exp $
+ * This Revision: $Id: usbconfig.h,v 1.4 2016-05-23 03:27:19 cvs Exp $
  */
 
 #ifndef __usbconfig_h_included__
@@ -129,14 +129,9 @@ rename it to "usbconfig.h". Then edit it accordingly.
 
 /* -------------------------- Device Description --------------------------- */
 
-#define  USB_CFG_VENDOR_ID       0x81, 0x17
-/* USB vendor ID for the device, low byte first. If you have registered your
- * own Vendor ID, define it here. Otherwise you use obdev's free shared
- * VID/PID pair. Be sure to read USBID-License.txt for rules!
- * This template uses obdev's shared VID/PID pair for HIDs: 0x16c0/0x5df.
- * Use this VID/PID pair ONLY if you understand the implications!
- */
-#define  USB_CFG_DEVICE_ID       0x96, 0x0a
+#define  USB_CFG_VENDOR_ID       0x9B, 0x28
+
+#define  USB_CFG_DEVICE_ID       0x1B, 0x00
 /* This is the ID of the product, low byte first. It is interpreted in the
  * scope of the vendor ID. If you have registered your own VID with usb.org
  * or if you have licensed a PID from somebody else, define it here. Otherwise
