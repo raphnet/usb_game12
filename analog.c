@@ -131,8 +131,7 @@ static void analogInit(void)
 static void analogUpdate(void)
 {
 	unsigned char data[4];
-	int x=128,y=128;
-	
+
 	readController(data);
 
 	/* Buttons are active low. Invert values. */
