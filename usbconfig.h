@@ -140,7 +140,7 @@ rename it to "usbconfig.h". Then edit it accordingly.
  * This template uses obdev's shared VID/PID pair for HIDs: 0x16c0/0x5df.
  * Use this VID/PID pair ONLY if you understand the implications!
  */
-#define USB_CFG_DEVICE_VERSION  0x00, 0x01
+#define USB_CFG_DEVICE_VERSION  0x01, 0x01
 /* Version number of the device: Minor number first, then major number.
  */
 #define USB_CFG_VENDOR_NAME     'r', 'a', 'p', 'h', 'n', 'e', 't', '.', 'n', 'e', 't'
